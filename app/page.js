@@ -1,6 +1,21 @@
+"use client";
 import React from "react";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement,
+} from "chart.js";
+import { Pie, Bar } from "react-chartjs-2";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Title, Tooltip, Legend, ChartDataLabels);
 
 function Home() {
   const navPoints = [
@@ -9,6 +24,169 @@ function Home() {
     { label: "Struktur Organisasi", href: "/struktur" },
     { label: "Artikel", href: "/artikel" },
   ];
+
+  const geografisData = {
+    labels: ["Tanah Pekarangan", "Tanah Sawah", "Tanah Tegalan", "Lain-lain"],
+    datasets: [
+      {
+        label: "Luas Wilayah (Ha)",
+        data: [82.0, 194.0, 64.0, 44.348],
+        backgroundColor: [
+          "rgba(75, 192, 192, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(255, 206, 86, 0.2)",
+          "rgba(153, 102, 255, 0.2)",
+        ],
+        borderColor: [
+          "rgba(75, 192, 192, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(153, 102, 255, 1)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const geografisOptions = {
+    maintainAspectRatio: false,
+  };
+
+  const totalGenderData = {
+    labels: ["Laki-laki", "Perempuan"],
+    datasets: [
+      {
+        label: "Jumlah Penduduk",
+        data: [2651, 2634],
+        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)"],
+        borderColor: ["rgba(54, 162, 235, 1)", "rgba(255, 99, 132, 1)"],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const totalGenderOptions = {
+    maintainAspectRatio: false,
+    plugins: {
+      datalabels: {
+        color: 'black',
+        font: {
+          weight: 'bold',
+          size: 14,
+        },
+        formatter: (value, context) => {
+          const total = context.chart.data.datasets[0].data.reduce((acc, val) => acc + val, 0);
+          const percentage = ((value / total) * 100).toFixed(2) + "%";
+          return `${value}\n(${percentage})`;
+        },
+      },
+      tooltip: {
+        callbacks: {
+          label: function (context) {
+            const label = context.label || "";
+            const value = context.raw;
+            const total = context.dataset.data.reduce((acc, val) => acc + val, 0);
+            const percentage = ((value / total) * 100).toFixed(2) + "%";
+            return `${label}: ${value} (${percentage})`;
+          },
+        },
+      },
+    },
+  };
+
+  const demografisData = {
+    labels: [
+      "0 s/d 1",
+      "2 s/d 4",
+      "5 s/d 9",
+      "10 s/d 14",
+      "15 s/d 19",
+      "20 s/d 24",
+      "25 s/d 29",
+      "30 s/d 34",
+      "35 s/d 39",
+      "40 s/d 44",
+      "45 s/d 49",
+      "50 s/d 54",
+      "55 s/d 59",
+      "60 s/d 64",
+      "65 s/d 69",
+      "70 s/d 74",
+      "75+",
+    ],
+    datasets: [
+      {
+        label: "Laki-laki",
+        data: [
+          53, 65, 198, 194, 205, 191, 190, 195, 192, 194, 195, 146, 123, 85, 86,
+          74, 142,
+        ],
+        backgroundColor: "rgba(54, 162, 235, 0.2)",
+        borderColor: "rgba(54, 162, 235, 1)",
+        borderWidth: 1,
+      },
+      {
+        label: "Perempuan",
+        data: [
+          56, 75, 192, 185, 202, 222, 175, 212, 242, 195, 196, 144, 120, 90, 87,
+          74, 174,
+        ],
+        backgroundColor: "rgba(255, 99, 132, 0.2)",
+        borderColor: "rgba(255, 99, 132, 1)",
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const demografisOptions = {
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        beginAtZero: true,
+      },
+      y: {
+        beginAtZero: true,
+      },
+    },
+  };
+
+  const mataPencaharianData = {
+    labels: [
+      "Belum Bekerja",
+      "Lainnya",
+      "Buruh Tani & Harian Lepas",
+      "Petani",
+      "Buruh Industri",
+      "Pedagang",
+      "Pensiunan",
+      "Pegawai Negeri Sipil",
+      "Pamong Desa",
+      "TNI/POLRI",
+      "Dokter",
+    ],
+    datasets: [
+      {
+        label: "Jumlah",
+        data: [1847, 1018, 992, 557, 368, 256, 130, 93, 11, 12, 1],
+        backgroundColor: "rgba(75, 192, 192, 0.2)",
+        borderColor: "rgba(75, 192, 192, 1)",
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const mataPencaharianOptions = {
+    indexAxis: 'y',
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        beginAtZero: true,
+      },
+      y: {
+        beginAtZero: true,
+      },
+    },
+  };
 
   return (
     <div>
@@ -49,245 +227,67 @@ function Home() {
         </h2>
         <hr className="border-gray-300 mb-4" />
         <div className="flex flex-col space-y-4">
-          <div
-            id="geografis"
-            className="p-4 border border-gray-800 rounded-lg shadow-sm bg-white"
-          >
-            <h3 className="text-xl font-bold mb-2">Geografis</h3>
-            <p>Luas wilayah Desa Donoyudan: 384.3480 Ha</p>
-            <ul className="list-disc pl-5">
-              <li>Tanah Pekarangan: 82.0000 Ha</li>
-              <li>Tanah Sawah: 194.0000 Ha</li>
-              <li>Tanah Tegalan: 64.0000 Ha</li>
-              <li>Lain-lain: 44.3480 Ha</li>
-            </ul>
-            <hr className="border-gray-300 my-4" />
-            <p>Batas Wilayah Desa Donoyudan:</p>
-            <ul className="list-disc pl-5">
-              <li>Sebelah Utara: Desa Wonorejo</li>
-              <li>Sebelah Timur: Desa Sambirembe</li>
-              <li>Sebelah Selatan: Desa Keden</li>
-              <li>Sebelah Barat: Wilayah Boyolali</li>
-            </ul>
+          <div className="flex flex-col md:flex-row">
+            <div
+              id="geografis"
+              className="p-4 border border-gray-800 rounded-lg shadow-sm bg-white md:w-1/2"
+            >
+              <h3 className="text-xl font-bold mb-2">Geografis</h3>
+              <div className="w-full h-64">
+                <Pie data={geografisData} options={geografisOptions} />
+              </div>
+            </div>
+            <div
+              id="batas-wilayah"
+              className="p-4 border border-gray-800 rounded-lg shadow-sm bg-white md:w-1/2 mt-4 md:mt-0 md:ml-4"
+            >
+              <h3 className="text-xl font-bold mb-2">Batas Wilayah Desa Donoyudan</h3>
+              <ul className="list-disc pl-5">
+                <li>Sebelah Utara: Desa Wonorejo</li>
+                <li>Sebelah Timur: Desa Sambirembe</li>
+                <li>Sebelah Selatan: Desa Keden</li>
+                <li>Sebelah Barat: Wilayah Boyolali</li>
+              </ul>
+            </div>
           </div>
           <div
             id="demografis"
             className="p-4 border border-gray-800 rounded-lg shadow-sm bg-white"
           >
             <h3 className="text-xl font-bold mb-2">Demografis</h3>
-            <p>Jumlah Penduduk Desa Donoyudan Tahun 2023:</p>
-            <ul className="list-disc pl-5">
-              <li>Laki-laki: 2651 Jiwa</li>
-              <li>Perempuan: 2634 Jiwa</li>
-              <li>Jumlah KK: 1665 KK</li>
-              <li>Jumlah RT: 18</li>
-              <li>Jumlah Kebayan: 3</li>
-            </ul>
-          </div>
-          <div
-            id="kependudukan"
-            className="p-4 border border-gray-800 rounded-lg shadow-sm bg-white"
-          >
-            <h3 className="text-xl font-bold mb-2">Kependudukan</h3>
-            <p>Jumlah Penduduk Desa Menurut Usia:</p>
-            <div className="overflow-x-auto">
-              <table className="min-w-full bg-white">
-                <thead>
-                  <tr>
-                    <th className="py-2 px-4 border-b border-gray-300">No</th>
-                    <th className="py-2 px-4 border-b border-gray-300">
-                      Kelompok Umur (tahun)
-                    </th>
-                    <th className="py-2 px-4 border-b border-gray-300">
-                      Laki-laki
-                    </th>
-                    <th className="py-2 px-4 border-b border-gray-300">
-                      Perempuan
-                    </th>
-                    <th className="py-2 px-4 border-b border-gray-300">
-                      Jumlah
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {[
-                    {
-                      no: 1,
-                      ageGroup: "0 s/d 1",
-                      male: 53,
-                      female: 56,
-                      total: 109,
-                    },
-                    {
-                      no: 2,
-                      ageGroup: "2 s/d 4",
-                      male: 65,
-                      female: 75,
-                      total: 140,
-                    },
-                    {
-                      no: 3,
-                      ageGroup: "5 s/d 9",
-                      male: 198,
-                      female: 192,
-                      total: 390,
-                    },
-                    {
-                      no: 4,
-                      ageGroup: "10 s/d 14",
-                      male: 194,
-                      female: 185,
-                      total: 379,
-                    },
-                    {
-                      no: 5,
-                      ageGroup: "15 s/d 19",
-                      male: 205,
-                      female: 202,
-                      total: 407,
-                    },
-                    {
-                      no: 6,
-                      ageGroup: "20 s/d 24",
-                      male: 191,
-                      female: 222,
-                      total: 413,
-                    },
-                    {
-                      no: 7,
-                      ageGroup: "25 s/d 29",
-                      male: 190,
-                      female: 175,
-                      total: 365,
-                    },
-                    {
-                      no: 8,
-                      ageGroup: "30 s/d 34",
-                      male: 195,
-                      female: 212,
-                      total: 407,
-                    },
-                    {
-                      no: 9,
-                      ageGroup: "35 s/d 39",
-                      male: 192,
-                      female: 242,
-                      total: 434,
-                    },
-                    {
-                      no: 10,
-                      ageGroup: "40 s/d 44",
-                      male: 194,
-                      female: 195,
-                      total: 389,
-                    },
-                    {
-                      no: 11,
-                      ageGroup: "45 s/d 49",
-                      male: 195,
-                      female: 196,
-                      total: 391,
-                    },
-                    {
-                      no: 12,
-                      ageGroup: "50 s/d 54",
-                      male: 146,
-                      female: 144,
-                      total: 290,
-                    },
-                    {
-                      no: 13,
-                      ageGroup: "55 s/d 59",
-                      male: 123,
-                      female: 120,
-                      total: 243,
-                    },
-                    {
-                      no: 14,
-                      ageGroup: "60 s/d 64",
-                      male: 85,
-                      female: 90,
-                      total: 175,
-                    },
-                    {
-                      no: 15,
-                      ageGroup: "65 s/d 69",
-                      male: 86,
-                      female: 87,
-                      total: 173,
-                    },
-                    {
-                      no: 16,
-                      ageGroup: "70 s/d 74",
-                      male: 74,
-                      female: 74,
-                      total: 148,
-                    },
-                    {
-                      no: 17,
-                      ageGroup: "75+",
-                      male: 142,
-                      female: 174,
-                      total: 316,
-                    },
-                  ].map((row) => (
-                    <tr key={row.no}>
-                      <td className="py-2 px-4 border-b border-gray-300">
-                        {row.no}
-                      </td>
-                      <td className="py-2 px-4 border-b border-gray-300">
-                        {row.ageGroup}
-                      </td>
-                      <td className="py-2 px-4 border-b border-gray-300">
-                        {row.male}
-                      </td>
-                      <td className="py-2 px-4 border-b border-gray-300">
-                        {row.female}
-                      </td>
-                      <td className="py-2 px-4 border-b border-gray-300">
-                        {row.total}
-                      </td>
-                    </tr>
-                  ))}
-                  <tr>
-                    <td
-                      colSpan="2"
-                      className="py-2 px-4 border-b border-gray-300 font-bold"
-                    >
-                      JUMLAH
-                    </td>
-                    <td className="py-2 px-4 border-b border-gray-300 font-bold">
-                      2651
-                    </td>
-                    <td className="py-2 px-4 border-b border-gray-300 font-bold">
-                      2634
-                    </td>
-                    <td className="py-2 px-4 border-b border-gray-300 font-bold">
-                      5285
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div className="flex flex-col md:flex-row items-center justify-center md:space-x-4">
+              <div className="w-full md:w-1/2 h-64 mb-4">
+                <Pie data={totalGenderData} options={totalGenderOptions} />
+              </div>
+              <div className="flex flex-col items-center space-y-4">
+                <div className="text-center">
+                  <p className="text-lg font-bold">Jumlah KK</p>
+                  <p className="text-3xl font-bold">1665</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-lg font-bold">Jumlah RT</p>
+                  <p className="text-3xl font-bold">18</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-lg font-bold">Jumlah Kebayan</p>
+                  <p className="text-3xl font-bold">3</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-lg font-bold">Penduduk Menurut Agama</p>
+                  <p className="text-3xl font-bold">Islam: 5285 (100%)</p>
+                </div>
+              </div>
             </div>
+            <hr className="border-gray-300 my-4" />
+            <p>Jumlah Penduduk Desa Donoyudan Tahun 2023:</p>
+            <div className="w-full h-64">
+              <Bar data={demografisData} options={demografisOptions} />
+            </div>
+            <hr className="border-gray-300 my-4" />
             <p className="mt-4">Mata Pencaharian:</p>
-            <ul className="list-disc pl-5">
-              <li>Petani: 557</li>
-              <li>Buruh Tani & Harian Lepas: 992</li>
-              <li>Buruh Industri: 368</li>
-              <li>Pedagang: 256</li>
-              <li>Pegawai Negeri Sipil: 93</li>
-              <li>TNI/POLRI: 12</li>
-              <li>Dokter: 1</li>
-              <li>Pensiunan: 130</li>
-              <li>Pamong Desa: 11</li>
-              <li>Lainnya: 1.018</li>
-              <li>Belum Bekerja: 1.847</li>
-            </ul>
-            <p className="mt-4">Penduduk Menurut Agama:</p>
-            <p>
-              Penduduk desa Donoyudan yang berjumlah 5285 jiwa semua beragama
-              Islam.
-            </p>
+            <div className="w-full h-64">
+              <Bar data={mataPencaharianData} options={mataPencaharianOptions} />
+            </div>
           </div>
         </div>
       </div>
