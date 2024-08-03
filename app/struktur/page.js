@@ -5,21 +5,22 @@ import Footer from "../components/Footer";
 
 function Struktur() {
   const navPoints = [{ label: "Kembali ke Beranda", href: "/" }];
-  const [selectedCategory, setSelectedCategory] = useState('Pemerintahan Desa');
+  const [selectedCategory, setSelectedCategory] = useState("Pemerintahan Desa");
   const [isOverflowing, setIsOverflowing] = useState(false);
   const containerRef = useRef(null);
 
   const categories = [
-    'Pemerintahan Desa',
-    'Badan Permusyawaratan Desa (BPD)',
-    'Lembaga Pemberdayaan Masyarakat Desa (LPMD)',
-    'Pengurus PKK Desa Donoyudan',
+    "Pemerintahan Desa",
+    "Badan Permusyawaratan Desa (BPD)",
+    "Lembaga Pemberdayaan Masyarakat Desa (LPMD)",
+    "Pengurus PKK Desa Donoyudan",
   ];
 
   const content = {
-    'Pemerintahan Desa': (
-      <div>
-        <p>Kepala Desa: Poniman, SH</p>
+    "Pemerintahan Desa": (
+      <div className="bg-white shadow-md rounded-lg p-4 mb-4 max-w-screen-lg mx-auto">
+        <p className="font-semibold">Kepala Desa: Poniman, SH</p>
+        <hr className="my-2" />
         <p>Sekretaris Desa: Agus Sugiyanto</p>
         <p>Kebayan 1: Maryono</p>
         <p>Kebayan 2: Ariyono</p>
@@ -32,22 +33,32 @@ function Struktur() {
         <p>Kaur Perencanaan: Rohani</p>
       </div>
     ),
-    'Badan Permusyawaratan Desa (BPD)': (
-      <div>
-        <p>Ketua: Taufiq Winarno, S.Pd</p>
+    "Badan Permusyawaratan Desa (BPD)": (
+      <div className="bg-white shadow-md rounded-lg p-4 mb-4 max-w-screen-lg mx-auto">
+        <p className="font-semibold">Ketua: Taufiq Winarno, S.Pd</p>
+        <hr className="my-2" />
         <p>Wakil: Aris Setyawan, S.Pd</p>
         <p>Sekretaris: Mahfut Amrullah, S.Pd.I</p>
-        <p>Ketua Bidang Penyelenggaraan Pemerintah Desa dan Pembinaan Kemasyarakatan: Rohmadi</p>
-        <p>Anggota: 1. Emi Minarni</p>
+        <p>
+          Ketua Bidang Penyelenggaraan Pemerintah Desa dan Pembinaan
+          Kemasyarakatan: Rohmadi
+        </p>
+        <p>Anggota:</p>
+        <p>1. Emi Minarni</p>
         <p>2. Fatah Prihariadin</p>
-        <p>Ketua Bidang Pembangunan Desa dan Pemberdayaan Masyarakat Desa: Siswanto</p>
-        <p>Anggota: 1. Muh. Supriyanto</p>
+        <p>
+          Ketua Bidang Pembangunan Desa dan Pemberdayaan Masyarakat Desa:
+          Siswanto
+        </p>
+        <p>Anggota:</p>
+        <p>1. Muh. Supriyanto</p>
         <p>2. Yusup</p>
       </div>
     ),
-    'Lembaga Pemberdayaan Masyarakat Desa (LPMD)': (
-      <div>
-        <p>Ketua: Drs. H. WS Gunawan, M.Pd</p>
+    "Lembaga Pemberdayaan Masyarakat Desa (LPMD)": (
+      <div className="bg-white shadow-md rounded-lg p-4 mb-4 max-w-screen-lg mx-auto">
+        <p className="font-semibold">Ketua: Drs. H. WS Gunawan, M.Pd</p>
+        <hr className="my-2" />
         <p>Wakil Ketua: H. Gunawan, S.Pd</p>
         <p>Sekretaris: M. Ali Imron, SP</p>
         <p>Bendahara: Sriyono, ST., M.Pd</p>
@@ -61,10 +72,11 @@ function Struktur() {
         <p>Bidang Pembangunan: Amirul Mukminin</p>
       </div>
     ),
-    'Pengurus PKK Desa Donoyudan': (
-      <div>
-        <p>Pembina: Poniman, SH</p>
-        <p>Ketua: Siti Nurhidayati, SE</p>
+    "Pengurus PKK Desa Donoyudan": (
+      <div className="bg-white shadow-md rounded-lg p-4 mb-4 max-w-screen-lg mx-auto">
+        <p className="font-semibold">Pembina: Poniman, SH</p>
+        <p className="font-semibold">Ketua: Siti Nurhidayati, SE</p>
+        <hr className="my-2" />
         <p>Wakil Ketua: Hj. Sumiyati</p>
         <p>Sekretaris I: Maghfiroh, S.Ag</p>
         <p>Sekretaris II: Lilies Ekowati Setyoningsih, S.Pd</p>
@@ -89,6 +101,7 @@ function Struktur() {
       </div>
     ),
   };
+  
 
   useEffect(() => {
     const checkOverflow = () => {
@@ -99,10 +112,10 @@ function Struktur() {
     };
 
     checkOverflow();
-    window.addEventListener('resize', checkOverflow);
+    window.addEventListener("resize", checkOverflow);
 
     return () => {
-      window.removeEventListener('resize', checkOverflow);
+      window.removeEventListener("resize", checkOverflow);
     };
   }, []);
 
@@ -116,13 +129,17 @@ function Struktur() {
         <hr className="border-gray-300 mb-4" />
         <div
           ref={containerRef}
-          className={`mb-4 ${isOverflowing ? 'overflow-x-auto' : ''} whitespace-nowrap`}
+          className={`flex justify-center items-center mb-4 ${
+            isOverflowing ? "overflow-x-auto" : ""
+          } whitespace-nowrap`}
         >
           {categories.map((category) => (
             <button
               key={category}
-              className={`inline-block px-4 py-2 m-2 ${
-                selectedCategory === category ? 'bg-blue-500 text-white' : 'bg-white text-black border'
+              className={`inline-block px-2 py-2 m-2 ${
+                selectedCategory === category
+                  ? "bg-blue-500 text-white"
+                  : "bg-white text-black border"
               } rounded-lg`}
               onClick={() => setSelectedCategory(category)}
             >
@@ -130,6 +147,7 @@ function Struktur() {
             </button>
           ))}
         </div>
+
         <div>{content[selectedCategory]}</div>
       </div>
       <Footer />
