@@ -18,7 +18,8 @@ function Struktur() {
 
   const content = {
     "Pemerintahan Desa": (
-      <div className="bg-white shadow-md rounded-lg p-4 mb-4 max-w-screen-lg mx-auto">
+      <div className="bg-white shadow-md rounded-lg p-4 mb-4 max-w-screen-lg mx-auto overflow-auto">
+        <img src="/images/structures/pemerintahan.jpg" alt="Pemerintahan Desa" className="w-full h-auto mb-4 rounded-lg"/>
         <p className="font-semibold">Kepala Desa: Poniman, SH</p>
         <hr className="my-2" />
         <p>Sekretaris Desa: Agus Sugiyanto</p>
@@ -101,7 +102,6 @@ function Struktur() {
       </div>
     ),
   };
-  
 
   useEffect(() => {
     const checkOverflow = () => {
