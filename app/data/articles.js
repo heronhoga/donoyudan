@@ -4,6 +4,7 @@ export const articles = [
     title: "Mata Air Sendang Dukuh Bendo",
     narasumber: "Mbah Ngadiman, Ibu Sri Partini, Bapak Suyatno, Ibu Wainem",
     penulis: "Meta Juwita Lestari (Ilmu Sejarah, Universitas Diponegoro)",
+    photo: "/images/desa-asset/dukuhbendo.png",
     snippet:
       "Desa Donoyudan memiliki sepuluh dukuh salah satunya adalah dukuh Bendo...",
     fullText: `Desa Donoyudan memiliki sepuluh dukuh salah satunya adalah dukuh Bendo. 
@@ -39,6 +40,7 @@ supaya terhindar dari hal buruk, selain itu juga sebagai simbol rasa syukur dan 
     title: "Profil Desa Donoyudan",
     narasumber: "Bu Sri Partini, Bapak Suyatno",
     penulis: "Meta Juwita Lestari (Ilmu Sejarah, Universitas Diponegoro)",
+    photo: "/images/desa-asset/profildesa.png",
     snippet:
       "Donoyudan merupakan sebuah desa di kecamatan Kalijambe, kabupaten Sragen...",
     fullText: `Donoyudan merupakan sebuah desa di kecamatan Kalijambe, kabupaten Sragen, 

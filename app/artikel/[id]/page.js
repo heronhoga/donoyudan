@@ -1,8 +1,10 @@
 "use client";
+
 import { articles } from '../../data/articles.js';
 import Navbar from '../../components/Navbar.js';
 import Footer from '../../components/Footer.js';
 import { useParams } from 'next/navigation.js';
+import Image from 'next/image';
 
 export default function ArticleDetail() {
   const { id } = useParams();
@@ -25,6 +27,19 @@ export default function ArticleDetail() {
           {article.title}
         </h2>
         <hr className="border-gray-300 mb-4" />
+
+        {article.photo && (
+          <div className="mb-4">
+            <Image 
+              src={article.photo}
+              alt={article.title}
+              width={800}
+              height={450}
+              className="w-full h-auto rounded"
+            />
+          </div>
+        )}
+
         <div className="bg-white p-4 rounded shadow text-justify">
           <p>{article.fullText}</p>
           <hr className="border-gray-300 my-4" />
@@ -32,6 +47,7 @@ export default function ArticleDetail() {
           <p className="text-right italic">Penulis: {article.penulis}</p>
         </div>
       </div>
+
       <Footer />
     </div>
   );
