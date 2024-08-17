@@ -35,7 +35,8 @@ function Struktur() {
       </div>
     ),
     "Badan Permusyawaratan Desa (BPD)": (
-      <div className="bg-white shadow-md rounded-lg p-4 mb-4 max-w-screen-lg mx-auto">
+      <div className="bg-white shadow-md rounded-lg p-4 mb-4 max-w-screen-lg mx-auto overflow-auto">
+        <img src="/images/structures/BPD.jpg" alt="Badan Permusyawaratan Desa" className="w-full h-auto mb-4 rounded-lg"/>
         <p className="font-semibold">Ketua: Taufiq Winarno, S.Pd</p>
         <hr className="my-2" />
         <p>Wakil: Aris Setyawan, S.Pd</p>
@@ -129,9 +130,7 @@ function Struktur() {
         <hr className="border-gray-300 mb-4" />
         <div
           ref={containerRef}
-          className={`flex justify-center items-center mb-4 ${
-            isOverflowing ? "overflow-x-auto" : ""
-          } whitespace-nowrap`}
+          className={`flex justify-start items-center mb-4 space-x-4 overflow-x-auto whitespace-nowrap`}
         >
           {categories.map((category) => (
             <button
